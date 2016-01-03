@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<!--
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css?v=31">
+  	<link rel="stylesheet" href="css/animate.css">
+	
+
+        <title>BOXY</title>
+    </head>
+    <body>
+<div class="app">
+		<!-- Left-Panel -->
+			<div id="menu">
+			   <ul>
+			    <li><a href="#login" active class="contentLink">Identification</a></li>
+			    <li><a href="#account" class="contentLink">Mon compte</a></li>
+			    <li><a href="#circles" class="contentLink">Mes cercles</a></li>
+			    <li><a href="#friends" class="contentLink">Mes amis</a></li>
+			    <li><a href="#messages" class="contentLink">Mes messages</a></li>
+			    <li><a href="#help" class="contentLink">Assistance</a></li>
+			   </ul>
+			</div>
+		   <!-- /Left-panel Menu -->
+
+	    <!-- page-index -->
+	    <div data-role="page" id="page-index">
+		    <!-- header -->
+		    <div data-role="header" position="fixed" data-theme="c">
+                    	<!--<a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>-->
+                    <h1>BOXY</h1>
+			<!--<a href="#left-panel" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open</a>-->
+			<a href="#"class="showMenu">Menu</a>
+		   </div>
+		   <!-- /header -->
+		<div role="main" class="ui-content">
+            		<h2 class="mc-text-center">Bienvenue!</h2>
+		        <p class="mc-top-margin-1-5"><b>Déjà enregistré </b></p>
+                        <a href="#page-signin" class="ui-btn ui-btn-b ui-corner-all">Se connecter</a>
+                        <p class="mc-top-margin-1-5"><b>Pas encore de compte?</b></p>
+                        <a href="#page-signup" class="ui-btn ui-btn-b ui-corner-all">Créer un compte</a>
+                        <p></p>
+               </div><!-- /content -->
+	   </div>
+	   <!-- /page-index -->
+	   <div data-role="page" id="page-signin">
+		<div data-role="header" data-theme="c" data-position="fixed">
+		    <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+		    <h1>BOXY</h1>
+		</div><!-- /header -->
+		<div role="main" class="ui-content">
+		    <h3>Connection</h3>
+		    <label for="txt-email">Adresse Email</label>
+		    <input type="text" name="txt-email" id="txt-email" value="">
+		    <label for="txt-password">Mot de passe</label>
+		    <input type="password" name="txt-password" id="txt-password" value="">
+		    <fieldset data-role="controlgroup">
+			<input type="checkbox" name="chck-rememberme" id="chck-rememberme">
+			<label for="chck-rememberme">Se souvenir de moi</label>
+		    </fieldset>
+		    <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Valider</a>
+		    <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">Mot de passe oublié?</a></p>
+		    <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
+			<div role="main" class="ui-content">
+			    <h3 class="mc-text-danger">Echec de connexion</h3>
+			    <p>Avez-vous entré les bonnes informations?</p>
+			    <div class="mc-text-center"><a href="#page-landing" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+			</div>
+		    </div>
+		</div><!-- /content -->
+	    </div><!-- /page -->
+
+		<div data-role="page" id="page-signup">
+			<div class="bi-header" data-role="header" data-theme="c" data-position="fixed">
+			    <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+			    <h1>BOXY</h1>
+			</div><!-- /header -->
+			<div role="main" class="ui-content">
+			    <h3>S'enregistrer</h3>
+			    <div id="ctn-err" class="bi-invisible"></div>
+			    <label for="txt-first-name">Prénom</label>
+			    <input type="text" name="txt-first-name" id="txt-first-name" value="">
+			    <label for="txt-last-name">Nom</label>
+			    <input type="text" name="txt-last-name" id="txt-last-name" value="">
+			    <label for="txt-email-address">Adresse Email</label>
+			    <input type="text" name="txt-email-address" id="txt-email-address" value="">
+			    <label for="txt-password">Mot de passe</label>
+			    <input type="password" name="txt-password" id="txt-password" value="">
+			    <label for="txt-password-confirm">Confirmer le mot de passe</label>
+			    <input type="password" name="txt-password-confirm" id="txt-password-confirm" value="">
+			    <a href="#dlg-sign-up-sent" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Valider</a>
+			    <!--<button id="btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Valider</button>-->
+			    <div data-role="popup" id="dlg-sign-up-sent" data-dismissible="false" style="max-width:400px;">
+				<div data-role="header">
+				    <h1>Finalisation...</h1>
+				</div>
+				<div role="main" class="ui-content">
+				    <h3>Confirmez votre adresse Email</h3>
+				    <p>Nous venons de vous envoyer un e-mail avec les instructions pour confirmer votre adresse e-mail. Merci de consulter ce message et suivre les instructions.</p>
+				    <div class="mc-text-center"><a href="sign-in.html" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+
+				</div>
+			    </div>
+			</div><!-- /content -->
+		    </div><!-- /page -->
+		    <div data-role="page" id="page-signup-succeeded">
+			<div data-role="header" data-theme="c">
+			    <h1>Boxy</h1>
+			</div><!-- /header -->
+			<div role="main" class="ui-content">
+			    <h2 class="mc-text-center">Registration Succeeded</h2>
+			    <p class="mc-top-margin-1-5">Congratulations!  You are now registered with BOXY.</p>
+			    <a href="#page-signin" class="ui-btn ui-btn-b ui-corner-all">Sign In</a>
+			    <p></p>
+			</div><!-- /content -->
+		    </div><!-- /page -->
+                <!-- Left-Panel -->
+                        <div id="menu">
+                           <ul>
+                            <li><a href="#login" active class="contentLink">Identification</a></li>
+                            <li><a href="#account" class="contentLink">Mon compte</a></li>
+                            <li><a href="#circles" class="contentLink">Mes cercles</a></li>
+                            <li><a href="#friends" class="contentLink">Mes amis</a></li>
+                            <li><a href="#messages" class="contentLink">Mes messages</a></li>
+                            <li><a href="#help" class="contentLink">Assistance</a></li>
+                           </ul>
+                        </div>
+                   <!-- /Left-panel Menu -->
+
+            <!-- page-index -->
+            <div data-role="page" id="page-landing">
+                    <!-- header -->
+                    <div data-role="header" position="fixed" data-theme="c">
+                    <h1>BOXY</h1>
+                        <!--<a href="#left-panel" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open</a>-->
+                        <a href="#"class="showMenu">Menu</a>
+                        <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+                   </div>
+                        <div role="main" class="ui-content">
+                            <h2 class="mc-text-center">Bienvenue Marc !</h2>
+			  	<!-- Amount Slider -->
+				<label for="slider-1">Combien vous faut-il ?</label>
+					<input type="range" name="slider-1" id="slider-1" value="200" min="100" max="1000" step="50" data-highlight="true">
+				 <label for="slider-2">Combien pouvez-vous payer par mois ?</label>
+                                        <input type="range" name="slider-2" id="slider-2" value="50" min="50" max="1000" step="50" data-highlight="true">
+			        <button class="btn btn-success btn-block">Montrez-moi comment ça marche</button>
+	
+		    	<p></p>
+                        </div><!-- /content -->
+	    </div><!-- /page -->
+
+</div><!-- /app -->
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
